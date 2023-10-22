@@ -404,3 +404,9 @@ console.log(account); */
 // const sumed = numbers.flat().reduce((acc, mov) => acc + mov, 0);
 // console.log(sumed);
 // console.log(numbers.flat().sort((a, b) => a - b));
+
+const x = Array.from(
+  { length: 100 },
+  () => Math.trunc(Math.random() * 100) + 1
+);
+console.log(x);
