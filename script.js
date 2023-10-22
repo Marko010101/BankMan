@@ -61,9 +61,12 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
-  movements.forEach(function (mov, i) {
+
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const html = ` 
@@ -172,6 +175,44 @@ btnTransfer.addEventListener('click', function (e) {
     // Update UI
     updateUi(currentAccount);
   }
+});
+
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+  const amount = Number(inputLoanAmount.value);
+
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    // ADD THE MOVEMENT
+    currentAccount.movements.push(amount);
+    // Update UI
+    updateUi(currentAccount);
+  }
+  inputLoanAmount.value = '';
+});
+
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  if (
+    currentAccount.username === inputCloseUsername.value &&
+    currentAccount?.pin === Number(inputClosePin.value)
+  ) {
+    const index = accounts.findIndex(
+      acc => acc.username === currentAccount.username
+    );
+    console.log(index);
+    accounts.splice(index, 1);
+    // Hide UI
+    containerApp.style.opacity = 0;
+  }
+  inputCloseUsername.value = inputClosePin.value = '';
+});
+
+let sorted = false;
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
 });
 
 /////////////////////////////////////////////////
@@ -342,3 +383,24 @@ console.log(firstWithdraval);
 const account = accounts.find(acc => acc.owner === 'Jessica Davis');
 
 console.log(account); */
+
+// const arr = [[1, 2, [[[[[[[[[[[[[3]]]]]]]]]]]]]], [[4], 5, 6], 7, 8];
+// console.log(arr.flat(100));
+
+// const numbers = [
+//   1,
+//   2,
+//   100,
+//   [203000, 230000],
+//   -3000,
+//   -3000,
+//   -30200,
+//   1000,
+//   -50000,
+//   [5000, 12],
+//   [-1000, 2000],
+// ];
+
+// const sumed = numbers.flat().reduce((acc, mov) => acc + mov, 0);
+// console.log(sumed);
+// console.log(numbers.flat().sort((a, b) => a - b));
