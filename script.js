@@ -286,7 +286,7 @@ btnLoan.addEventListener('click', function (e) {
       // Reset timer
       // clearInterval(timer);
       // timer = startLogOutTimer();
-    }, 2500);
+    }, 2000);
   }
   inputLoanAmount.value = '';
 });
@@ -349,3 +349,13 @@ console.log(day1); */
 // };
 
 // console.log(new Intl.NumberFormat('en-US', options).format(num));
+
+/* setInterval(function () {
+  const now = new Date();
+  const day = now.getDay();
+  const hour = now.getHours();
+  const minute = now.getMinutes();
+  const second = now.getSeconds();
+  return console.log(`${day}/${hour} ${minute}:${second}`);
+}, 1000);
+ */
