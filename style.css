@@ -82,6 +82,19 @@ nav {
   outline: none;
   color: #777;
 }
+.center {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-right: 2rem;
+}
+.users {
+  font-size: 1.1rem;
+}
+.users--names {
+  font-size: 1.35rem;
+  color: orangered;
+}
 
 /* MAIN */
 .app {
